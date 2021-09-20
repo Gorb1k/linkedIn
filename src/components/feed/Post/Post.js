@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import './Post.css'
 import {Avatar} from "@material-ui/core";
 import InputOption from "../InputOptions/InputOption";
 import {postInputOptions} from "./postInputOptions";
 
 
-const Post = ({name, description, message, photoUrl}) => {
+const Post = forwardRef (({name, description, message, photoUrl}, ref) => {
     return (
-        <div className='post'>
+        <div ref={ref} className='post'>
             <div className="post__header">
-                <Avatar/>
+                <Avatar src={photoUrl}>
+                    {name[0]}
+                </Avatar>
                 <div className="post__info">
                     <h2>{name}</h2>
                     <p>{description}</p>
@@ -30,6 +32,6 @@ const Post = ({name, description, message, photoUrl}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Post;

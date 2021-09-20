@@ -1,14 +1,19 @@
 import React from 'react';
 import './HeaderOption.css'
 import {Avatar} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../../store/slices/userSlice";
 
-const HeaderOption = ({Icon, title, avatar}) => {
-    console.log(avatar)
+const HeaderOption = ({Icon, title, onClick, avatar}) => {
+    const user = useSelector(selectUser)
+
     return (
-        <div className='headerOption'>
+        <div onClick={onClick} className='headerOption'>
             {Icon && <Icon className='headerOption__icon'/>}
             {avatar && (
-                <Avatar className='headerOption__icon' src={avatar}/>
+                <Avatar className='headerOption__icon' src={user?.photoUrl}>
+                    {user?.displayName[0]}
+                </Avatar>
             )}
             <h3 className='headerOption__title'>{title}</h3>
         </div>
